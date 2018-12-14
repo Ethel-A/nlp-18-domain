@@ -1,0 +1,59 @@
+'''this function takes in the topics file and the questions file and then creates a dictionary
+with every topic as a key and all the questions related to that topic as values'''
+
+def bags(quest_file, top_file):
+    dict = {}
+    with open(quest_file) as questions:
+        quests = questions.readlines()
+        quests = quests[:-5]
+    with open(top_file) as topics:
+        tops = topics.readlines();
+    for i in range (len(quests)):
+        quest_top = tops[i]
+        top = trimmer(quest_top)
+        if top not in dict:
+            dict[top] = []
+            dict[top].append(trimmer(quests[i]))
+        else:
+            dict[top].append(trimmer(quests[i]))
+    return dict
+
+dict = bags('Questions.txt', 'Topics.txt')
+# vals = dict.values()
+# for line in vals:
+#     print(line, end = '\n\n')
+#print(topics('Topics.txt'))
+
+'''This function takes in a dctionary with a list of sentences associated with each topic and
+converts the list of sentences to a list of words'''
+def words(dict):
+    for line in dict:
+        words = []
+        for item in dict[line]:
+            data = item.split(" ")
+            for word in data:
+                if word != "":
+                    words.append(word)
+            dict[line] = words
+    return dict
+
+'''thi function takes a dictinary of words and the asscoaited topic and counts the occurence
+each word for each topic, stores it in a dictionary and assigns it as the value for the topic
+in the dictionary'''
+def count(words):
+    for line in words:
+        values = words[line]
+        counter = {}
+        for word in values:
+            if word in counter:
+                counter[word] = counter[word] + 1
+            else:
+                counter[word] = 1
+        words[line] = counter
+    return words
+
+dict = bags('Questions.txt', 'Topics.txt')   
+ans = words(dict)
+counts = count(ans)
+for i in counts:
+    print('Key: ' + str(i) + "\t Value: " + str(counts[i]) + "\n\n")
