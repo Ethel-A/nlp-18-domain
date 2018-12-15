@@ -1,2 +1,12 @@
 Natural Language Processing
-Final Project - Buildind  a converstational systems (chatbot)
+Final Project - Implementing 6 types of conversational systems with different concept basis:
+Programs developed on Google Colabs
+Programs include for Topic Modelling:
+  Cosine Similarity
+  Multinomial Naive Bayes
+  Logistic Regression
+Programs for qna:
+  cosine similarity
+  jaccard similarity
+  minimum edit distance
+Libraries: Python Sklearn
